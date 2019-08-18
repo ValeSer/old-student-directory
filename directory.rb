@@ -28,6 +28,19 @@ def push_student(name, cohort)
   @students << {name: name, cohort: cohort.to_sym}
 end
 
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  if filename.nil?
+     load_students
+  elsif File.exists?(filename) # if it exists
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist"
+    exit # quit the program
+  end
+end
+
 def interactive_menu
   loop do
     print_menu
@@ -91,18 +104,6 @@ def save_students
     file.puts csv_line
   end
   file.close
-end
-
-def try_load_students
-  filename = ARGV.first # first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
-  if File.exists?(filename) # if it exists
-    load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
-  else # if it doesn't exist
-    puts "Sorry, #{filename} doesn't exist"
-    exit # quit the program
-  end
 end
 
 try_load_students
