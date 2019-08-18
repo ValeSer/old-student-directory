@@ -2,7 +2,7 @@
 
 def input_students
   puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
+  puts "Type again or just hit return twice to finish"
   # get the first name
   name = STDIN.gets.chomp
   # while the name is not empty, repeat this code
@@ -70,8 +70,11 @@ def process(selection)
       show_students
     when "3"
       save_students
+      puts "Students saved"
     when "4"
+      puts "Loading the students..."
       load_students
+      puts "Students loaded"
     when "9"
       exit # this will cause the program to terminate
     else
